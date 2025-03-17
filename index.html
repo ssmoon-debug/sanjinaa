@@ -124,10 +124,14 @@
             display: block;
         }
 
-        .enable-admin {
-            display: block;
-            margin: 1rem auto;
+        .admin-buttons {
+            text-align: center;
+            margin-bottom: 1rem;
+        }
+
+        .btn-admin {
             padding: 0.8rem 1.5rem;
+            margin: 5px;
             background-color: var(--primary-color);
             color: white;
             border: none;
@@ -136,8 +140,16 @@
             font-size: 1rem;
         }
 
-        .enable-admin:hover {
+        .btn-admin:hover {
             background-color: var(--secondary-color);
+        }
+
+        #disable-admin {
+            display: none;
+        }
+
+        .admin-mode #disable-admin {
+            display: inline-block;
         }
 
         .copyright {
@@ -161,7 +173,7 @@
             <h2>Assignments</h2>
             <div class="assignments">
                 <div class="assignment-item">
-                    <a href="https://docs.google.com/document/d/10pm-sKghQUjS3HaAZR_Gx6f7iwxB5yZ8wMoJxH4886o/edit?usp=drive_link" target="_blank" class="assignment-link">My Assignment</a>
+                    <a href="https://docs.google.com/document/d/10pm-sKghQUjS3HaAZR_Gx6f7iwxB5yZ8wMoJxH4886o/edit?usp=drive_link" target="_blank" class="assignment-link">Identity Verification</a>
                     <div class="assignment-actions">
                         <button class="btn btn-rename" onclick="renameAssignment(this)">Rename</button>
                         <button class="btn btn-delete" onclick="deleteAssignment(this)">Delete</button>
@@ -171,7 +183,10 @@
             </div>
         </div>
 
-        <button class="enable-admin" onclick="enableAdminMode()">Enable Admin Mode</button>
+        <div class="admin-buttons">
+            <button class="btn-admin" id="enable-admin" onclick="enableAdminMode()">Enable Admin Mode</button>
+            <button class="btn-admin" id="disable-admin" onclick="disableAdminMode()">Disable Admin Mode</button>
+        </div>
 
         <div class="section admin-section">
             <h2>Admin Panel</h2>
@@ -190,9 +205,17 @@
             let password = prompt("Enter admin password:");
             if (password === "starsandsaturn") {
                 document.body.classList.add("admin-mode");
+                document.getElementById("enable-admin").style.display = "none";
+                document.getElementById("disable-admin").style.display = "inline-block";
             } else {
                 alert("Incorrect password!");
             }
+        }
+
+        function disableAdminMode() {
+            document.body.classList.remove("admin-mode");
+            document.getElementById("enable-admin").style.display = "inline-block";
+            document.getElementById("disable-admin").style.display = "none";
         }
 
         function addAssignment() {
@@ -235,3 +258,4 @@
     </script>
 </body>
 </html>
+
